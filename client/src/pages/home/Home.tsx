@@ -7,7 +7,7 @@ function Home() {
         {/* Container avec l'image de fond */}
         <div
           className="w-full h-screen bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center px-4"
-          style={{ backgroundImage: "url('../public/bureau.png')" }}
+          style={{ backgroundImage: "url('/bureau.png')" }}
         >
           {/* Titre */}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-snug sm:leading-normal text-center text-white bg-black/25 p-4 rounded w-full max-w-[90rem]"  data-auto-translate>
