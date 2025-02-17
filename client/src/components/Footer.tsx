@@ -14,7 +14,7 @@ const Footer = () => {
         <div className=" w-full max-w-screen ">
           <div className="flex justify-between  items-center sm:px-4 py-6   ">
             <div>
-              <img src="../public/Logo.svg" alt="logo" />
+              <img src="/Logo.svg" alt="logo" />
             </div>
             
               <div className="text-gray-500 md:flex gap-4  dark:text-gray-400 font-medium">
