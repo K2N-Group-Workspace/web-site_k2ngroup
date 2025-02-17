@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "version2 k2ngroup web-site",
+			"path": ".."
+		},
+		{
+			"name": "traefik",
+			"path": "../../K2Ngroup-web-site/traefik"
+		}
+	],
+	"settings": {}
+}

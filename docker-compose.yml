@@ -1,0 +1,228 @@
+
+services:
+  # Service Traefik (Reverse Proxy)
+  traefik:
+    image: traefik:v3.2.2  # Utilisation de la version 3.2.2 de Traefik
+    command:
+      - "--api.insecure=false"  # Désactive l'accès non sécurisé à l'API
+      - "--api.dashboard=true"  # Active le tableau de bord de Traefik
+      - "--providers.docker=true"  # Active le fournisseur Docker pour découvrir les services
+      - "--providers.docker.exposedbydefault=false"  # Désactive l'exposition automatique des services
+      - "--entrypoints.web.address=:80"  # Point d'entrée HTTP sur le port 80
+      - "--entrypoints.websecure.address=:443"  # Point d'entrée HTTPS sur le port 443
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"  # Active le défi TLS pour Let's Encrypt
+      - "--certificatesresolvers.myresolver.acme.email=${TRAEFIK_ACME_EMAIL}"  # E-mail pour Let's Encrypt
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"  # Stockage des certificats
+      - "--log.level=DEBUG"  # Active les logs en mode DEBUG
+    ports:
+      - "80:80"  # Expose le port HTTP
+      - "443:443"  # Expose le port HTTPS
+    volumes:
+      - "./traefik/letsencrypt:/letsencrypt"  # Volume pour stocker les certificats Let's Encrypt
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Accès au socket Docker
+    networks:
+      - traefik  # Réseau Traefik
+    restart: always  # Redémarrage automatique en cas d'échec
+    labels:
+      - "traefik.http.routers.api.rule=Host(`traefik.local`)"  # Règle de routage pour le tableau de bord
+      - "traefik.http.routers.api.service=api@internal"  # Service interne pour le tableau de bord
+      - "traefik.http.routers.api.entrypoints=webs"  # Utilisation du point d'entrée HTTPS
+      - "traefik.http.routers.api.tls=true"  # Activation du TLS
+      - "traefik.http.routers.api.tls.certresolver=myresolver"  # Résolveur de certificats
+      - "traefik.http.routers.api.middlewares=traefik-auth"  # Middleware d'authentification
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$hashed_password"  # Authentification de base
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/ping"]  # Vérification de la santé
+      interval: 30s  # Intervalle de vérification
+      timeout: 10s  # Temps d'attente
+      retries: 3  # Nombre de tentatives
+    logging:
+      driver: "json-file"  # Driver de logs
+      options:
+        max-size: "10m"  # Taille maximale des fichiers de logs
+        max-file: "3"  # Nombre maximal de fichiers de logs
+
+  # # Service de gestion des utilisateurs et du contenu
+  # user_and_content_management_service:
+  #   image: python:3-slim  # Image Python
+  #   build:
+  #     context: ./services/user_and_content_management_service  # Contexte de construction
+  #   container_name: user_and_content_management_service  # Nom du conteneur
+  #   working_dir: /app  # Répertoire de travail
+  #   volumes:
+  #     - ./services/user_and_content_management_service:/app  # Montage du volume
+  #   environment:
+  #     - DJANGO_SETTINGS_MODULE=config.settings  # Module de configuration Django
+  #   command: >
+  #     sh -c "
+  #     pip install -r requirements.txt  # Installation des dépendances
+  #     python manage.py migrate  # Migration de la base de données
+  #     python manage.py runserver 0.0.0.0:8000  # Démarrage du serveur
+  #     "
+  #   ports: 
+  #    - "8000:8000"  # Expose le port HTTP
+  #   labels:
+  #     - "traefik.enable=true"  # Activation de Traefik
+  #     - "traefik.http.routers.user_and_content_management_service.rule=Host(`user.local`)"  # Règle de routage
+  #     - "traefik.http.routers.user_and_content_management_service.entrypoints=web"  # Point d'entrée HTTPS
+  #     - "traefik.http.routers.user_and_content_management_service.tls=true"  # Activation du TLS
+  #     - "traefik.http.routers.user_and_content_management_service.tls.certresolver=myresolver"  # Résolveur de certificats
+  #     - "traefik.http.middlewares.rate-limit.ratelimit.average=100"  # Limite de débit
+  #     - "traefik.http.middlewares.rate-limit.ratelimit.burst=50"  # Limite de débit en rafale
+  #   networks:
+  #     - traefik  # Réseau Traefik
+  #   restart: always  # Redémarrage automatique
+   
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]  # Vérification de la santé
+  #     interval: 30s  # Intervalle de vérification
+  #     timeout: 10s  # Temps d'attente
+  #     retries: 3  # Nombre de tentatives
+  #   logging:
+  #     driver: "json-file"  # Driver de logs
+  #     options:
+  #       max-size: "10m"  # Taille maximale des fichiers de logs
+  #       max-file: "3"  # Nombre maximal de fichiers de logs
+
+  # # Service d'opérations et de notifications
+  # operation_and_notification:
+  #   image: node:20-alpine  # Image Node.js
+  #   build:
+  #     context: ./services/operation_and_notification  # Contexte de construction
+  #   container_name: operation_and_notification  # Nom du conteneur
+  #   working_dir: /app  # Répertoire de travail
+  #   volumes:
+  #     - ./services/operation_and_notification:/app  # Montage du volume
+  #   environment:
+  #     - NODE_ENV=development  # Environnement Node.js
+  #   command: 
+  #     sh ./start.sh 
+  #   ports:
+  #     - "4000:4000"
+  #   labels:
+  #     - "traefik.enable=true"  # Activation de Traefik
+  #     - "traefik.http.routers.operation_and_notification.rule=Host(`operation.local`)"  # Règle de routage
+  #     - "traefik.http.routers.operation_and_notification.entrypoints=web"  # Point d'entrée HTTPS
+  #     - "traefik.http.routers.operation_and_notification.tls=true"  # Activation du TLS
+  #     - "traefik.http.routers.operation_and_notification.tls.certresolver=myresolver"  # Résolveur de certificats
+  #   networks:
+  #     - traefik  # Réseau Traefik
+  #   restart: always  # Redémarrage automatique
+  #   depends_on:
+  #     - mongo
+  #     - minio  # Dépendance sur le service MongoDB
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:3000/health"]  # Vérification de la santé
+  #     interval: 30s  # Intervalle de vérification
+  #     timeout: 10s  # Temps d'attente
+  #     retries: 3  # Nombre de tentatives
+  #   logging:
+  #     driver: "json-file"  # Driver de logs
+  #     options:
+  #       max-size: "10m"  # Taille maximale des fichiers de logs
+  #       max-file: "3"  # Nombre maximal de fichiers de logs
+
+  # Service client
+  client:
+    image: node:20-alpine  # Image Node.js
+    build:
+      context: ./client  # Contexte de construction
+    container_name: client  # Nom du conteneur
+    working_dir: /app  # Répertoire de travail
+    volumes:
+      - ./client:/app  # Montage du volume
+    environment:
+      - NODE_ENV=development  # Environnement Node.js
+    command: >
+       sh ./start.sh 
+
+    ports:
+    - "3000:3000"
+    labels:
+      - "traefik.enable=true"  # Activation de Traefik
+      - "traefik.http.routers.client.rule=Host(`client.local`)"  # Règle de routage
+      - "traefik.http.routers.client.entrypoints=web"  # Point d'entrée HTTPS
+      - "traefik.http.routers.client.tls=true"  # Activation du TLS
+      - "traefik.http.routers.client.tls.certresolver=myresolver"  # Résolveur de certificats
+    networks:
+      - traefik  # Réseau Traefik
+    restart: always  # Redémarrage automatique
+    depends_on:
+      - user_and_content_management_service  # Dépendance sur le service de gestion des utilisateurs
+      - operation_and_notification  # Dépendance sur le service d'opérations
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]  # Vérification de la santé
+      interval: 30s  # Intervalle de vérification
+      timeout: 10s  # Temps d'attente
+      retries: 3  # Nombre de tentatives
+    logging:
+      driver: "json-file"  # Driver de logs
+      options:
+        max-size: "10m"  # Taille maximale des fichiers de logs
+        max-file: "3"  # Nombre maximal de fichiers de logs
+
+#   # Service MongoDB
+#   mongo:
+#     image: mongo:latest  # Image MongoDB
+#     container_name: mongodb  # Nom du conteneur
+#     ports:
+#       - "27017:27017"  # Expose le port MongoDB
+#     volumes:
+#       - mongo-data:/data/db  # Montage du volume pour les données MongoDB
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}  # Utilisateur root MongoDB
+#       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}  # Mot de passe root MongoDB
+#     networks:
+#       - traefik  # Réseau Traefik
+#     restart: always  # Redémarrage automatique
+#     healthcheck:
+#       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]  # Vérification de la santé
+#       interval: 30s  # Intervalle de vérification
+#       timeout: 10s  # Temps d'attente
+#       retries: 3  # Nombre de tentatives
+#     logging:
+#       driver: "json-file"  # Driver de logs
+#       options:
+#         max-size: "10m"  # Taille maximale des fichiers de logs
+#         max-file: "3"  # Nombre maximal de fichiers de logs
+
+#   # Service MinIO
+#   minio:
+#     image: minio/minio:latest  # Image MinIO
+#     container_name: miniodb  # Nom du conteneur
+#     environment:
+#       MINIO_ROOT_USER: ${MINIO_ROOT_USER}  # Utilisateur root MinIO
+#       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}  # Mot de passe root MinIO
+#     ports:
+#       - "9001:9001"  # Expose le port MinIO
+#       - "8900:8900"  # Expose le port de la console MinIO
+#     volumes:
+#       - minio-data:/data/minio  # Montage du volume pour les données MinIO
+#     command: 'minio server /data/minio --console-address ":8900"'  # Commande de démarrage
+#     networks:
+#       - traefik  # Réseau Traefik
+#     restart: always  # Redémarrage automatique
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:9001/minio/health/live"]  # Vérification de la santé
+#       interval: 30s  # Intervalle de vérification
+#       timeout: 10s  # Temps d'attente
+#       retries: 3  # Nombre de tentatives
+#     logging:
+#       driver: "json-file"  # Driver de logs
+#       options:
+#         max-size: "10m"  # Taille maximale des fichiers de logs
+#         max-file: "3"  # Nombre maximal de fichiers de logs
+
+# # Réseaux
+networks:
+  traefik:
+    external: true  # Réseau externe pour Traefik
+  internal:
+    internal: true  # Réseau interne pour les services backend
+
+# Volumes
+volumes:
+  mongo-data:
+    driver: local  # Volume pour MongoDB
+  minio-data:
+    driver: local  # Volume pour MinIO

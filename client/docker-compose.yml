@@ -1,0 +1,53 @@
+
+services:
+  client:
+    image: node:20-alpine
+    build:
+      context: .
+    container_name: client
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+    command: >
+      sh ./start.sh
+    ports:
+    - "3000:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.client.rule=Host(`client.local`)"
+      - "traefik.http.routers.client.entrypoints=web"
+      - "traefik.http.routers.client.tls=true"
+      - "traefik.http.routers.client.tls.certresolver=myresolver"
+    networks:
+      - traefik
+    restart: always
+    
+    depends_on:
+      - user_and_content_management_service
+      # - operation_and_notification
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+  
+
+  libretranslate:
+    build: .
+    ports:
+      - "5050:5050"
+    environment:
+      - LT_API_KEYS=true # Active les clés API (optionnel)
+    volumes:
+      - ./data:/app/data # Persiste les données (optionnel)
+
+networks:
+  traefik:
+    external: true
