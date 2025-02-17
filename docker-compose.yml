@@ -146,10 +146,12 @@ services:
       - "traefik.http.routers.client.tls.certresolver=myresolver"  # Résolveur de certificats
     networks:
       - traefik  # Réseau Traefik
-    restart: always  # Redémarrage automatique
-    depends_on:
-      - user_and_content_management_service  # Dépendance sur le service de gestion des utilisateurs
-      - operation_and_notification  # Dépendance sur le service d'opérations
+    restart: always 
+  
+    # depends_on:
+    #   - user_and_content_management_service  # Dépendance sur le service de gestion des utilisateurs
+    #   - operation_and_notification  # Dépendance sur le service d'opérations
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]  # Vérification de la santé
       interval: 30s  # Intervalle de vérification

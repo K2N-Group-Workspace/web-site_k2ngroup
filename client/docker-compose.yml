@@ -24,9 +24,10 @@ services:
       - traefik
     restart: always
     
-    depends_on:
-      - user_and_content_management_service
-      # - operation_and_notification
+    # depends_on:
+    #   - user_and_content_management_service
+    #   - operation_and_notification
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]
       interval: 30s
