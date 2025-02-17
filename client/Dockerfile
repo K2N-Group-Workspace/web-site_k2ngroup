@@ -22,4 +22,4 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 3000
 
 # Commande pour démarrer l'application
-CMD ["nginx", "-g", "daemon off;", "libretranslate"]
+CMD ["node", "dist/app.js", "libretranslate"]
