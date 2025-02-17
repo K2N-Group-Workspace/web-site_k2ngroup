@@ -14,4 +14,4 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 # Lancer Nginx
-CMD ["nginx", "-g", "daemon off;", "libretranslate"]
+CMD ["nginx", "-g", "daemon off;"]
