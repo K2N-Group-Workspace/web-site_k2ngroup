@@ -223,8 +223,8 @@ networks:
     internal: true  # Réseau interne pour les services backend
 
 # Volumes
-volumes:
-  mongo-data:
-    driver: local  # Volume pour MongoDB
-  minio-data:
-    driver: local  # Volume pour MinIO
+# volumes:
+#   mongo-data:
+#     driver: local  # Volume pour MongoDB
+#   minio-data:
+#     driver: local  # Volume pour MinIO
