@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 
 const founders = [
@@ -65,7 +64,7 @@ function Slider() {
         {founders.map((founder, index) => (
           <motion.div
             key={index}
-            className={`${founder.color} p-8 rounded-lg shadow-lg mb-8 flex flex-col md:flex-row items-center gap-8`}
+            className={`${founder.color} p-8 h-screen rounded-lg shadow-lg mb-8 flex flex-col md:flex-row items-center gap-8`}
             variants={itemVariants}
           >
           <div>
