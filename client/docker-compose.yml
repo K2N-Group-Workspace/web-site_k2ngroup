@@ -38,16 +38,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-  
 
-  libretranslate:
-    build: .
-    ports:
-      - "5050:5050"
-    environment:
-      - LT_API_KEYS=true # Active les clés API (optionnel)
-    volumes:
-      - ./data:/app/data # Persiste les données (optionnel)
 
 networks:
   traefik:

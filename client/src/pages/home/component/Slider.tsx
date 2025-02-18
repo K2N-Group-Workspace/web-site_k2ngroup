@@ -1,58 +1,107 @@
+import React from "react";
+import { motion } from "framer-motion";
 
-import "./index.css"
+const founders = [
+  {
+    name: "Jean Dupont",
+    role: "Responsable de K2N Konsultant",
+    story: "Jean Dupont a commencé sa carrière dans le conseil en stratégie avant de fonder K2N Konsultant. Passionné par l'innovation, il guide les entreprises vers le succès.",
+    color: "bg-blue-100",
+    logo: "logo-K.svg",
+  },
+  {
+    name: "Marie Curie",
+    role: "Responsable de K2N Service",
+    story: "Marie Curie a une expertise approfondie dans la gestion des services clients. Elle a développementé des solutions sur mesure pour répondre aux besoins des clients de K2N Service.",
+    color: "bg-green-100",
+    logo: "logo-S.svg",
+  },
+  {
+    name: "Pierre Durand",
+    role: "Responsable de K2N Technologie",
+    story: "Pierre Durand est un pionnier dans le domaine de la technologie. Il a dirigé le développement de solutions technologiques de pointe pour K2N Technologie.",
+    color: "bg-red-100",
+    logo: "logo-T.svg",
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.5,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
 
 function Slider() {
   return (
-    <div data-parallax='container'>
-      <header data-parallax='group'>
-        <div className="title" data-parallax='layer' data-parallax-speed='front'>
-          <h1>K2N GROUP</h1>
-          <span>Infinity War</span>
-          <p>A CSS parallax experiment</p>
-        </div>
-        <div data-parallax='layer' data-parallax-speed='slowest' data-image='captain-america'></div>
-        <div data-parallax='layer' data-parallax-speed='slower' data-image='scarlet-witch'></div>
-        <div data-parallax='layer' data-parallax-speed='slow' data-image='black-widow'></div>
-        <div data-parallax='layer' data-parallax-speed='slower' data-image='vision'></div>
-        <div data-parallax='layer' data-parallax-speed='slowest' data-image='iron-man'></div>
-      </header>
+    <div className="h-screen overflow-y-auto">
+      {/* Header */}
+      <motion.header
+        className="h-3/6 flex flex-col items-center justify-center bg-gradient-to-b from-black to-gray-900"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <h1 className="text-6xl md:text-8xl font-bold mb-4">K2N Group</h1>
+        <p className="text-xl md:text-2xl text-gray-400">Découvrez les fondateurs de notre entreprise</p>
+      </motion.header>
 
-      <section className="preamble" data-parallax='none'>
-        <p><strong>Avengers: Infinity War</strong> is a 2018 American superhero film based on the Marvel Comics superhero team the Avengers...</p>
-      </section>
+      {/* Section des fondateurs */}
+      <motion.section
+        className="min-h-screen p-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        {founders.map((founder, index) => (
+          <motion.div
+            key={index}
+            className={`${founder.color} p-8 rounded-lg shadow-lg mb-8 flex flex-col md:flex-row items-center gap-8`}
+            variants={itemVariants}
+          >
+          <div>
+            <img src="/konsultan.jpg" alt={`Logo ${founder.role}`} className="w-32 h-32 md:w-48 md:h-48" />
+          </div>
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold mb-4">{founder.name}</h2>
+              <h3 className="text-xl font-semibold mb-4">{founder.role}</h3>
+              <p className="text-gray-700">{founder.story}</p>
+            </div>
+            <div className="flex-1 flex justify-center">
+              <motion.img
+                src={founder.logo}
+                alt={`Logo ${founder.role}`}
+                className="w-32 h-32 md:w-48 md:h-48"
+                whileHover={{ scale: 1.1, rotate: 10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </motion.section>
 
-      <section className="parallax" data-parallax='group'>
-        <div data-parallax='layer' data-parallax-speed='base'></div>
-        <p><strong>Parallax</strong> (from Ancient Greek παράλλαξις 'alternation') is a displacement or difference in the apparent position...</p>
-        <div className="stars" data-parallax='layer' data-parallax-speed='slow'></div>
-        <div className="deep-stars" data-parallax='layer' data-parallax-speed='slowest'></div>
-      </section>
-
-      <section className="plot" data-parallax='group'>
-        <div className="plot--content" data-parallax='layer' data-parallax-speed='base'>
-          <h2>Synopsis</h2>
-          <p>The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos...</p>
-        </div>
-        <div className="character" data-parallax='layer' data-parallax-speed='slowest' data-image='nebula'></div>
-        <div className="character" data-parallax='layer' data-parallax-speed='slower' data-image='winter-soldier'></div>
-        <div className="character" data-parallax='layer' data-parallax-speed='slower' data-image='okoye'></div>
-        <div className="character" data-parallax='layer' data-parallax-speed='slower' data-image='captain-america-2'></div>
-        <div className="character" data-parallax='layer' data-parallax-speed='slow' data-image='mantis'></div>
-        <div className="character" data-parallax='layer' data-parallax-speed='slow' data-image='scarlet-witch-2'></div>
-      </section>
-
-      <footer data-parallax='none'>
-        <h3>Avengers <small>Infinity War</small></h3>
-        <p>A CSS parallax experiment based on <a href='https://keithclark.co.uk/articles/pure-css-parallax-websites/' rel='external' target='_blank'>Keith Clark's article</a>.</p>
-        <p>Images from <a href='https://www.marvel.com/' rel='external' target='_blank'>Marvel</a> and PNG cut-outs by <a href='https://www.deviantart.com/stark3879' rel='external' target='_blank'>stark3879 on DeviantArt</a>.</p>
-        <p>Created with <span aria-label='love'>❤️</span> (and tears) by <a href='https://codepen.io/aepicos/'>@aepicos</a>.</p>
-      </footer>
-
-      <aside className="todo" data-parallax='none'>
-        <small><strong>TODO</strong>: figure out a work-around for <code>overflow:hidden</code> as it breaks the parallax on iOS <span role='presentation'>☹️</span> and (time permitting) create a more robust CSS library.</small>
-      </aside>
+      {/* Footer */}
+      <motion.footer
+        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-t from-black to-gray-900"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-4xl md:text-6xl font-bold mb-4">Rejoignez-nous</h2>
+        <p className="text-xl md:text-2xl text-gray-400">Faites partie de notre aventure.</p>
+      </motion.footer>
     </div>
-  )
+  );
 }
 
-export default Slider
+export default Slider;
