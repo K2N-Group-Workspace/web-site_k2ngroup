@@ -68,7 +68,7 @@ function Slider() {
             variants={itemVariants}
           >
           <div>
-            <img src="/konsultan.jpg" alt={`Logo ${founder.role}`} className="w-32 h-32 md:w-48 md:h-48" />
+            <img src="technologie.png" alt={`Logo ${founder.role}`} className="w-32 h-32 md:w-48 md:h-48" />
           </div>
             <div className="flex-1">
               <h2 className="text-3xl font-bold mb-4">{founder.name}</h2>

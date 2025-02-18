@@ -9,6 +9,10 @@ RUN yarn build
 # Étape finale avec Nginx
 FROM nginx:alpine
 
+# Copier la configuration Nginx personnalisée
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copier les fichiers de l'application
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Exposer le port
