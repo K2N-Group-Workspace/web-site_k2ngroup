@@ -15,7 +15,7 @@ function Header() {
 
   return (
 
-    <header className="static top-0 left-0 p-4 shadow-md font-roboto  text-[1rem] bg-bg-gradient dark:bg-dark dark:text-white text-clip">
+    <header className="fixed w-full top-0 left-0 p-2 shadow-md font-roboto  text-[1rem] bg-bg-gradient dark:bg-dark dark:text-white text-clip">
 
       <div className="container mx-auto flex items-center justify-between">
         <NavLink to="/">
