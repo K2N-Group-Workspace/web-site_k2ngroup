@@ -1,5 +1,6 @@
-import Slider from "./component/Slider";
+// import Slider from "./component/Slider";
 import { Avis } from "@/components/avis";
+import ServicesSection from "./component/ServiceSection";
 function Home() {
   return (
     <div>
@@ -40,7 +41,8 @@ function Home() {
       <div className=" my-[5rem]">
         {/* <Produit /> */}
       </div>
-      <Slider/>
+      {/* <Slider/> */}
+      <ServicesSection/>
       <Avis />
     </div>
   );
