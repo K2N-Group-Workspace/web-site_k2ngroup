@@ -15,11 +15,11 @@ function Header() {
 
   return (
 
-    <header className="fixed w-full top-0 left-0 p-2 shadow-md font-roboto  text-[1rem] bg-bg-gradient dark:bg-dark dark:text-white text-clip">
+    <header className=" w-full top-0 left-0 p-2 shadow-md font-roboto  text-[1rem] bg-bg-gradient dark:bg-dark dark:text-white text-clip">
 
       <div className="container mx-auto flex items-center justify-between">
         <NavLink to="/">
-          <img src="../public/Logo vert.svg" alt="logo" />
+          <img src="/Logo vert.svg" alt="logo" />
         </NavLink>
         <Navbar/>
         <button className="block sm:hidden text-dark" onClick={() => setIsOpen(!isOpen)} >
@@ -49,9 +49,11 @@ function Header() {
       </div>
 
       
-      {/* {isOpen && (
-        <Menu/>
-      )} */}
+      {isOpen && (
+        <div className="absolute text-white top-0 left-0 w-full z-10">
+          hhhhhhhh
+        </div>
+      )}
     </header>
   );
 }
