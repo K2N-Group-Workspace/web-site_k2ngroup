@@ -15,9 +15,9 @@ function Header() {
 
   return (
 
-    <header className=" w-full top-0 left-0 p-2 shadow-md font-roboto  text-[1rem] bg-bg-gradient dark:bg-dark dark:text-white text-clip">
+    <header className="  top-0 left-0 p-2 shadow-md font-roboto  text-[1rem] bg-bg-gradient dark:bg-dark dark:text-white text-clip">
 
-      <div className="container mx-auto flex items-center justify-between">
+      <div className="flex mx-[2%] items-center justify-between">
         <NavLink to="/">
           <img src="/Logo vert.svg" alt="logo" />
         </NavLink>
