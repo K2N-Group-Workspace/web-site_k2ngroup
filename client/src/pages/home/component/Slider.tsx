@@ -1,3 +1,5 @@
+import { AiOutlineLinkedin } from "react-icons/ai"; 
+import { AiOutlineTwitter } from "react-icons/ai"; 
 import { motion } from "framer-motion";
 // import { useState, useEffect } from "react";
 
@@ -62,16 +64,15 @@ const textVariants = {
 
 function Slider() {
   return (
-    <div className="h-screen overflow-y-auto flex flex-col items-center justify-between">
+    <div className="h-screen overflow-y-auto px-4 flex flex-col items-center justify-between">
       {/* Header */}
       <motion.header
-        className="h-4/6 flex flex-col md:w-full items-center justify-center bg-gradient-to-b from-black to-gray-900"
+        className="h-4/6 flex flex-col md:w-full "
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h1 className="text-6xl md:text-8xl text-white font-bold mb-4">K2N Group</h1>
-        <p className="text-xl md:text-2xl text-gray-400">Découvrez les fondateurs de notre entreprise</p>
+        <p className="text-2xl font-bold text-dark dark:text-white lg:text-5xl font-roboto">Découvrez les fondateurs de notre entreprise</p>
       </motion.header>
       {/* Section des fondateurs */}
       <motion.section
@@ -84,7 +85,7 @@ function Slider() {
         {founders.map((founder, index) => (
           <motion.div
             key={index}
-            className="h-s flex gap-4 flex-col md:flex-row items-center  w-full bg-blue-"
+            className="h-s  flex gap-4 flex-col md:flex-row items-center  w-full bg-blue-"
             variants={itemVariants}
           >
             {/* Partie Photo */}
@@ -118,11 +119,13 @@ function Slider() {
                   {founder.story}
                 </motion.p>
                 <motion.div className="mt-4 flex gap-8" variants={textVariants}>
-                  <a href={founder.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-                    <img src="linkedin-icon.svg" alt="LinkedIn" className="w-8 h-8" />
+                  <a href={founder.socialLinks.linkedin} target="_blank" className="flex items-center gap-2 shadow-lg rounded p-2" rel="noopener noreferrer">
+                    <AiOutlineLinkedin />
+                    <span>Linkedin</span>
                   </a>
-                  <a href={founder.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                    <img src="twitter-icon.svg" alt="Twitter" className="w-8 h-8" />
+                  <a href={founder.socialLinks.twitter} target="_blank" className="flex items-center gap-2 shadow-lg rounded p-2" rel="noopener noreferrer">
+                    <AiOutlineTwitter />
+                    <span>Twitter</span>
                   </a>
                 </motion.div>
               </motion.div>

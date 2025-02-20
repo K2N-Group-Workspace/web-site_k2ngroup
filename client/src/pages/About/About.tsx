@@ -3,8 +3,8 @@ import Info from "./component/Info";
 import Map from "./component/Map";
 const About = () => {
   return (
-    <div className="h-screen">
-      <div className="font-Roboto flex h-1/2 w-full items-center justify-center">
+    <div className="">
+      <div className="font-Roboto flex h-[50vh] w-full items-center justify-center">
         {/* Container avec l'image de fond */}
         <div
           className="flex h-full w-full flex-col items-center justify-center bg-cover bg-center bg-no-repeat px-4"
@@ -22,7 +22,7 @@ const About = () => {
         </div>
       </div>
       <div className="my-10 px-4 md:px-0 flex flex-col justify-center gap-10 lg:flex-row lg:gap-[7rem]">
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-1 flex-col gap-10">
           <Info
             img="/cube.png"
             title="Notre Histoire"
@@ -39,17 +39,17 @@ const About = () => {
             description="K2N group a pour mission la prestation de services de conseil et de consultation dans divers domaines que ce soit pour son propre compte ou pour le compte de tiers."
           />
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex flex-1 items-center justify-center">
           <img
             src="/Colaborateur.png"
             alt=""
-            className="h- w-[65rem]"
+            className=""
           />
         </div>
       </div>
-      <div className="my-[10rem] flex flex-col justify-center gap-10 lg:flex-row lg:gap-[7rem]">
+      <div className="my-[10rem] px-4 md:px-0 flex flex-col justify-center gap-10 lg:flex-row lg:gap-[7rem]">
         <div className="flex flex-col gap-[5rem]">
-          <h1 className="text-2xl font-bold text-white lg:text-5xl">
+          <h1 className="text-2xl font-bold text-dark dark:text-white lg:text-5xl">
             Description du logo
           </h1>
           <img src="/3D.png" alt="" className="h-auto w-[65rem]" />
@@ -58,7 +58,7 @@ const About = () => {
           <Info
             img="/cube.png"
             title="K2N"
-            size="3rem"
+            // size="3rem"
             description="K2N est un nom riche de sens, issu des initiales de ses fondateurs : K pour KAPNGANG, K pour KONMENEK, et N pour NGOUANA. Il incarne l'héritage de ces pionniers et symbolise l'union de leurs compétences et de leur vision."
           />
           <Info

@@ -16,7 +16,7 @@ export default function Layout() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-bg-gradient">
+    <div className="min-h-screen bg-bg-gradient dark:bg-dark">
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
         <Spinner />
