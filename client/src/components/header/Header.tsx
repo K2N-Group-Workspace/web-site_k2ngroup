@@ -7,6 +7,8 @@ import Navbar from "./component/Navbar";
 // import DarkMode from "./component/darkMode";
 import { ModeToggle } from '../mode_toggle';
 import { AuthContext } from '../context/AuthContext';
+import ButoonHeader from "./component/ButoonHeader";
+import NavbarMobile from './component/NavbarMobile';
 
 function Header() {
 
@@ -22,27 +24,22 @@ function Header() {
           <img src="/Logo vert.svg" alt="logo" />
         </NavLink>
         <Navbar/>
-        <button className="block sm:hidden text-dark" onClick={() => setIsOpen(!isOpen)} >
+       <div className=" gap-2 blockus sm:hidden">
+        <ModeToggle/>
+       <button className="block sm:hidden text-dark text-[1.6rem]" onClick={() => setIsOpen(!isOpen)} >
           {isOpen ? (<IoMdClose />) : (<AiOutlineMenu />)}
         </button>
+       </div>
+        
 
         <div className="hidden sm:flex items-center gap-4">
                   <ModeToggle/> 
                   <AvatarIcon/>
           <div className="rounded-full dark:shadow-dark-mode shadow-light p-2 gap-2 flex items-center bg-white ">
            {!isAuthenticated && (
-                <>
-                    <NavLink to="/Inscription">
-                        <button className="rounded-full shadow-light px-4 py-2 text-[1rem] hover:bg-gradient-to-r from-dark-green to-custom-orange text-green-700 hover:text-white ">
-                            S'inscrire
-                        </button>
-                    </NavLink>
-                    <NavLink to="/connexion">
-                        <button className="rounded-full px-4 py-2 text-[1rem] hover:bg-gradient-to-r from-dark-green to-custom-orange text-green-700 hover:text-white">
-                            Se connecter
-                        </button>
-                    </NavLink>
-                </>
+                
+                <ButoonHeader/>
+                
             )}
           </div>
         </div>
@@ -50,8 +47,9 @@ function Header() {
 
       
       {isOpen && (
-        <div className="absolute text-white top-0 left-0 w-full z-10">
-          hhhhhhhh
+        <div className="absolute p-4 text-white bg-white/30 w-[50%] top-[4.4rem] rounded right-0 backdrop-blur-md z-10">
+          <NavbarMobile/>
+          <ButoonHeader/>
         </div>
       )}
     </header>

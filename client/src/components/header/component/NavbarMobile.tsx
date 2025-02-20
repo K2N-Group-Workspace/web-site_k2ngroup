@@ -2,19 +2,18 @@ import { NavLink } from "react-router-dom";
 import Select from "./Select"
 import { Button } from "@/components/ui/button";
 
-
-function Navbar() {
+function NavbarMobile() {
   return (
     <div>
-        <nav className="hidden md:flex gap-6  items-center">
+      <nav className="flex flex-col gap-6 mb-4">
           <NavLink to="/" className={({ isActive }) =>
-            isActive ? "bg-gradient-to-r   from-dark-green bg-clip-text text-transparent to-custom-orange  " : "text-dark dark:text-white"
+            isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange  " : "text-dark dark:text-white"
           }
           >
             Accueil
           </NavLink>
              <NavLink to="/about" className={({ isActive }) =>
-            isActive ? "bg-gradient-to-r   from-dark-green bg-clip-text text-transparent to-custom-orange  " : "text-dark dark:text-white"
+            isActive ? "bg-gradient-to-r from-dark-green bg-clip-text text-transparent to-custom-orange  " : "text-dark dark:text-white"
           }
           >
             A propos
@@ -53,4 +52,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default NavbarMobile
