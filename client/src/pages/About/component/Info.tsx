@@ -1,12 +1,16 @@
-const Info = (props: { img: string; title: string; size?: string; description: string }) => {
+import { BiCubeAlt } from "react-icons/bi"; 
+const Info = (props: {  title: string; size?: string; description: string }) => {
   return (
     <div className="flex items-center font-roboto gap-4">
       {/* Image et séparateur */}
       <div className="flex flex-col items-center gap-4">
-        <img
-          className="lg:w-auto text-dark dark:text-white size-fit w-[20rem] lg:h-auto rounded-lg  object-cover"
+        {/* <img
           src={props.img}
-          alt="Image principale"
+          /> */}
+        <BiCubeAlt
+          className="lg:w-auto text-dark dark:text-white size-fit text-[2rem] lg:h-auto rounded-lg  object-cover"
+          // alt="Image principale"
+        
         />
         {/* Trait vertical */}
         <div className="w-1 bg-dark dark:bg-white" style={{ height: props.size || "10rem" }}></div>
