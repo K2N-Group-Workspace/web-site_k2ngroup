@@ -65,7 +65,7 @@ function Select() {
 
   return (
     <div
-      className="relative text-[1rem] flex items-center gap-2 rounded-[.5rem] px-2 text-dark dark:text-white"
+      className="relative text-[1rem] flex items-center gap-2 rounded-[.5rem] lg:px-2 text-dark dark:text-white"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
@@ -79,7 +79,7 @@ function Select() {
             animate="open"
             exit="closed"
             variants={dropdownVariants}
-            className="absolute z-50 p-4 top-20 left-[10%] dark:bg-gray-800 rounded-[.5rem] bg-white w-[50rem] shadow-md"
+            className="absolute z-50 p-4 lg:top-20 -top-20 left-[-200%] lg:left-[10%]  dark:bg-gray-800 rounded-[.5rem] bg-white lg:w-[50rem] shadow-md"
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
           >
@@ -115,19 +115,19 @@ function Select() {
                     >
                       <a
                         href=""
-                        className="text-[1.1rem] hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         K2n pisciculture
                       </a>
                       <a
                         href="/boutique"
-                        className="text-[1.1rem] hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         K2n boutique
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         K2n argents d'entretien
                       </a>
@@ -167,61 +167,61 @@ function Select() {
                     >
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
                       >
                         Construction des fosses septique biofil/ecologique
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
                       >
                         Developpement d'application
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
                       >
                         Suivi et evaluation de projet
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         Electricite batiment
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         Etude de marché
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 truncate-text rounded-[.5rem] px-2"
                       >
                         Etudes statistiqueset socio-demographiques
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         Formation sur site en ligne
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         Notice d'impact environnemental
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         Traduction et interprétation
                       </a>
                       <a
                         href=""
-                        className="text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
+                        className=" text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2"
                       >
                         Datamining
                       </a>
@@ -259,10 +259,10 @@ function Select() {
                       exit="exit"
                       className="flex flex-col gap-2"
                     >
-                       <a href='' className='text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2'>Recherche en statistique appliquée</a>
-                            <a href='' className='text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] truncate-text px-2'>Recherche en sciences sociales et sciences humaines</a>
-                            <a href='' className='text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] truncate-text px-2'>Recherche en economie appliquée</a>
-                            <a href='' className='text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2'>Recherche et developpement IA</a>
+                       <a href='' className=' text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2'>Recherche en statistique appliquée</a>
+                            <a href='' className=' text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] truncate-text px-2'>Recherche en sciences sociales et sciences humaines</a>
+                            <a href='' className=' text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] truncate-text px-2'>Recherche en economie appliquée</a>
+                            <a href='' className=' text-[.7rem] lg:text-[1.1rem] text-dark  dark:text-white hover:bg-green-600 rounded-[.5rem] px-2'>Recherche et developpement IA</a>
                     </motion.div>
                   )}
                 </AnimatePresence>

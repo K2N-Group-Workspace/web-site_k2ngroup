@@ -26,7 +26,7 @@ function Header() {
         <Navbar/>
        <div className=" gap-2 blockus sm:hidden">
         <ModeToggle/>
-       <button className="block sm:hidden text-dark text-[1.6rem]" onClick={() => setIsOpen(!isOpen)} >
+       <button className="block sm:hidden text-dark dark:text-white  text-[1.6rem]" onClick={() => setIsOpen(!isOpen)} >
           {isOpen ? (<IoMdClose />) : (<AiOutlineMenu />)}
         </button>
        </div>
@@ -47,7 +47,10 @@ function Header() {
 
       
       {isOpen && (
-        <div className="absolute p-4 text-white bg-white/30 w-[50%] top-[4.4rem] rounded right-0 backdrop-blur-md z-10">
+        <div
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        className="absolute p-4 text-white bg-white/30 w-[40%] top-[4.4rem] rounded right-0 backdrop-blur-md z-10">
           <NavbarMobile/>
           <ButoonHeader/>
         </div>
